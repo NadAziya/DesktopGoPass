@@ -1,0 +1,18 @@
+@font-face {
+  font-family: "OpenSans";
+  src: url("./Font/OpenSans-Regular.ttf");
+}
+@font-face {
+  font-family: "sansPro";
+  src: url("./Font/SourceSansPro-Regular.ttf");
+}
+@font-face {
+  font-family: "sansProBold";
+  src: url("./Font/SourceSansPro-Bold.ttf");
+}
+
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
