@@ -14,6 +14,7 @@ import db from "../firebase";
 const Modal = ({ isShowing, hide, cent }) => {
   const [modify, setModify] = useState(false);
   const [centreVac, setCentreVac] = useState("/");
+  const [centreTest, setCentreTest] = useState("/");
   const [dateDose1, setDateDose1] = useState("00-00-0000");
   const [dateDose2, setDateDose2] = useState("00-00-0000");
   const [etat, setEtat] = useState("/");
@@ -43,6 +44,7 @@ const Modal = ({ isShowing, hide, cent }) => {
         date_1dose: dateDose1,
         date_2dose: dateDose2,
         centre_vacc: centreVac,
+        centre_test: centreTest,
         etat: etat,
         date_test: dateTest,
       });
@@ -53,11 +55,13 @@ const Modal = ({ isShowing, hide, cent }) => {
           prenom: cent.prenom,
           etat: etat,
           date_test: dateTest,
+          centre_test: centreTest,
         });
         await db.collection("users").doc(cent.id).collection("historique").add({
           prenom: cent.prenom,
           etat: etat,
           date_test: dateTest,
+          centre_test: centreTest,
         });
       }
       setLoading(true);
@@ -77,6 +81,7 @@ const Modal = ({ isShowing, hide, cent }) => {
     setVaccination(cent.vaccination);
     setTypeVaccin(cent.type_vaccin);
     setCentreVac(cent.centre_vacc);
+    setCentreTest(cent.centre_test);
     setDateTest(cent.date_test);
   }, [cent]);
   console.log(cent);
@@ -129,44 +134,67 @@ const Modal = ({ isShowing, hide, cent }) => {
                         />
                       </div>
                     </div>
-                    <p>
-                      <span className=" mr-4">Nom: </span>
-                      <span className=" text-gray-500">{cent.nom}</span>
-                    </p>
-                    <p>
-                      <span className=" mr-4">Prénom:</span>
-                      <span className=" text-gray-500">{cent.prenom}</span>
-                    </p>
-                    <p>
-                      <span className=" mr-4">Date de naissance:</span>
-                      <span className=" text-gray-500">
-                        {cent.date_de_naissance}
-                      </span>
-                    </p>
-                    <p>
-                      <span className=" mr-4">Etat du patient:</span>
-                      <span className=" text-gray-500">{cent.etat}</span>
-                    </p>
-                    <p>
-                      <span className=" mr-4">Vaccination:</span>
-                      <span className=" text-gray-500">{cent.vaccination}</span>
-                    </p>
-                    <p>
-                      <span className=" mr-4">Type du vaccin:</span>
-                      <span className=" text-gray-500">{cent.type_vaccin}</span>
-                    </p>
-                    <p>
-                      <span className=" mr-4">Date de la 1ere dose:</span>
-                      <span className=" text-gray-500">{cent.date_1dose}</span>
-                    </p>
-                    <p>
-                      <span className=" mr-4">Date de la 2eme dose:</span>
-                      <span className=" text-gray-500">{cent.date_2dose}</span>
-                    </p>
-                    <p>
-                      <span className=" mr-4">Centre de vaccination:</span>
-                      <span className=" text-gray-500">{cent.centre_vacc}</span>
-                    </p>
+                    <div className="overflow-y-auto h-96 space-y-4  border-transparent shadow-md pl-8">
+                      <p>
+                        <span className=" mr-4">Nom: </span>
+                        <span className=" text-gray-500">{cent.nom}</span>
+                      </p>
+                      <p>
+                        <span className=" mr-4">Prénom:</span>
+                        <span className=" text-gray-500">{cent.prenom}</span>
+                      </p>
+                      <p>
+                        <span className=" mr-4">Date de naissance:</span>
+                        <span className=" text-gray-500">
+                          {cent.date_de_naissance}
+                        </span>
+                      </p>
+                      <p>
+                        <span className=" mr-4">Etat du patient:</span>
+                        <span className=" text-gray-500">{cent.etat}</span>
+                      </p>
+                      <p>
+                        <span className=" mr-4">Date du dernier test:</span>
+                        <span className=" text-gray-500">{cent.date_test}</span>
+                      </p>
+                      <p>
+                        <span className=" mr-4">centre du test:</span>
+                        <span className=" text-gray-500">
+                          {cent.centre_test}
+                        </span>
+                      </p>
+                      <p>
+                        <span className=" mr-4">Vaccination:</span>
+                        <span className=" text-gray-500">
+                          {cent.vaccination}
+                        </span>
+                      </p>
+
+                      <p>
+                        <span className=" mr-4">Type du vaccin:</span>
+                        <span className=" text-gray-500">
+                          {cent.type_vaccin}
+                        </span>
+                      </p>
+                      <p>
+                        <span className=" mr-4">Date de la 1ere dose:</span>
+                        <span className=" text-gray-500">
+                          {cent.date_1dose}
+                        </span>
+                      </p>
+                      <p>
+                        <span className=" mr-4">Date de la 2eme dose:</span>
+                        <span className=" text-gray-500">
+                          {cent.date_2dose}
+                        </span>
+                      </p>
+                      <p>
+                        <span className=" mr-4">Centre de vaccination:</span>
+                        <span className=" text-gray-500">
+                          {cent.centre_vacc}
+                        </span>
+                      </p>
+                    </div>
                     <div className="mt-12 flex justify-end">
                       <ButtonMain
                         className="inline-flex items-center px-4 py-2 rounded-md text-sm font-medium border focus:outline-none focus:ring transition text-red-600 border-red-600 hover:text-white hover:bg-red-600 active:bg-red-700 focus:ring-red-300"
@@ -207,8 +235,9 @@ const Modal = ({ isShowing, hide, cent }) => {
                     </h2>
                     <h2 className="text-center ">vos modifications</h2>
                   </div>
-                  <div className="grid grid-cols-2 space-y-6 space-x-6 p-6 ">
-                    <div className="mt-6 ml-6">
+
+                  <div className="grid grid-cols-2 space-y-4 space-x-6 p-6 ">
+                    <div className="mt-4 ml-6">
                       <TextField
                         disabled
                         id="standard-disabled"
@@ -282,6 +311,18 @@ const Modal = ({ isShowing, hide, cent }) => {
                         placeholder="JJ/MM/AA"
                       />
                     </div>
+                    <div className="">
+                      <TextField
+                        value={centreTest}
+                        onChange={(e) => {
+                          setCentreTest(e.target.value);
+                        }}
+                        label="Centre du test"
+                        id="standard-size-normal"
+                        defaultValue=""
+                        variant="standard"
+                      />
+                    </div>
                     <div className="flex flex-col">
                       <div>
                         <label className="text-gray-600 font-xs font-sans font-thin">
@@ -324,7 +365,7 @@ const Modal = ({ isShowing, hide, cent }) => {
                           Vaccination COVID-19
                         </label>
                       </div>
-                      <div className="inline-block relative w-52 mt-2">
+                      <div className="inline-block relative w-52 ">
                         <select
                           value={vaccinationn}
                           onChange={(e) => {
@@ -377,6 +418,7 @@ const Modal = ({ isShowing, hide, cent }) => {
                         className="border border-gray-500 p-1 w-52 pl-2"
                         type="date"
                         placeholder="JJ/MM/AA"
+                        max="15-11-2021"
                       />
                     </div>
 
@@ -392,8 +434,8 @@ const Modal = ({ isShowing, hide, cent }) => {
                         variant="standard"
                       />
                     </div>
-
-                    <div className=" flex justify-end pt-24">
+                    <div></div>
+                    <div className=" flex justify-center pt-8">
                       <ButtonMain
                         className="inline-flex items-center px-4 py-2 rounded-md text-sm font-medium border focus:outline-none focus:ring transition text-red-600 border-red-600 hover:text-white hover:bg-red-600 active:bg-red-700 focus:ring-red-300"
                         onClick={hide}
