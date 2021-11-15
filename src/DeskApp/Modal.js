@@ -125,16 +125,7 @@ const Modal = ({ isShowing, hide, cent }) => {
                     </h2>
                   </div>
                   <div className="space-y-4  w-1/2 border-transparent shadow-2xl pl-8">
-                    <div>
-                      <div className="flex space-x-2 overflow-hidden justify-center">
-                        <img
-                          className="inline-block h-32  w-32 shadow-md rounded-full ring-2 ring-white"
-                          src={cent.imageUri}
-                          alt=""
-                        />
-                      </div>
-                    </div>
-                    <div className="overflow-y-auto h-96 space-y-4  border-transparent shadow-md pl-8">
+                    <div className=" space-y-4   pl-8">
                       <p>
                         <span className=" mr-4">Nom: </span>
                         <span className=" text-gray-500">{cent.nom}</span>
@@ -188,14 +179,15 @@ const Modal = ({ isShowing, hide, cent }) => {
                           {cent.date_2dose}
                         </span>
                       </p>
-                      <p>
-                        <span className=" mr-4">Centre de vaccination:</span>
+                      <p className="mb-20">
+                        <span className=" mr-4 ">Centre de vaccination:</span>
                         <span className=" text-gray-500">
                           {cent.centre_vacc}
                         </span>
                       </p>
                     </div>
-                    <div className="mt-12 flex justify-end">
+
+                    <div className="mt-32 flex items-end justify-end">
                       <ButtonMain
                         className="inline-flex items-center px-4 py-2 rounded-md text-sm font-medium border focus:outline-none focus:ring transition text-red-600 border-red-600 hover:text-white hover:bg-red-600 active:bg-red-700 focus:ring-red-300"
                         onClick={refreshPage}
@@ -418,7 +410,6 @@ const Modal = ({ isShowing, hide, cent }) => {
                         className="border border-gray-500 p-1 w-52 pl-2"
                         type="date"
                         placeholder="JJ/MM/AA"
-                        max="15-11-2021"
                       />
                     </div>
 

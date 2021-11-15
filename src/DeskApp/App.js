@@ -50,12 +50,15 @@ const App = () => {
     <div className="bg-gray-100 h-screen  ">
       <div className="bg-white shadow-xl w-full flex flex-row justify-between h-40  ">
         <div className="p-4 text-gray-900">
-          <h1 className="text-3xl font-bold p-1">Bienvenue !</h1>
+          <h1 className="text-3xl font-bold p-1 mb-6">Bienvenue !</h1>
           <p>
-            GoPass vous permet de suivre l'état de vos patients face au
-            COVID-19.
+            Metter à jour l'état du patient en indiquant si il est positif ou
+            négatif au COVID-19,
           </p>
-          <p>vaccination, test, un code couleur unique généré !</p>
+          <p>
+            indiquer aussi si le patient est vacciné en spécifiant la date des
+            doses, les centres, et le type de vaccin administré.
+          </p>
         </div>
         <div className="p-4">
           <img
