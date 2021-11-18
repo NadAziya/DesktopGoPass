@@ -287,70 +287,61 @@ const Modal = ({ isShowing, hide, cent }) => {
                         </div>
                       </div>
                     </div>
-                    <div className="flex flex-col">
+
+                    {etat == "Positif(ve)" || etat == "Négatif(ve)" ? (
                       <div>
-                        <label className="text-gray-600 font-xs font-sans font-thin">
-                          Date du test
-                        </label>
-                      </div>
-                      <input
-                        value={dateTest}
-                        onChange={(e) => {
-                          setDateTest(e.target.value);
-                        }}
-                        className="border border-gray-500 p-1 w-52 pl-2"
-                        type="date"
-                        placeholder="JJ/MM/AA"
-                      />
-                    </div>
-                    <div className="">
-                      <TextField
-                        value={centreTest}
-                        onChange={(e) => {
-                          setCentreTest(e.target.value);
-                        }}
-                        label="Centre du test"
-                        id="standard-size-normal"
-                        defaultValue=""
-                        variant="standard"
-                      />
-                    </div>
-                    <div className="flex flex-col">
-                      <div>
-                        <label className="text-gray-600 font-xs font-sans font-thin">
-                          Type du vaccin
-                        </label>
-                      </div>
-                      <div className="inline-block relative w-52 mt-2">
-                        <select
-                          value={typevaccin}
-                          onChange={(e) => {
-                            setTypeVaccin(e.target.value);
-                          }}
-                          className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
-                        >
-                          <option value="/">/</option>
-                          <option value="Sinovac-CoronaVac">
-                            Sinovac-CoronaVac
-                          </option>
-                          <option value="Astrazeneca">Astrazeneca</option>
-                          <option value="Spoutnik">Spoutnik</option>
-                          <option value="Johnson and Johnson">
-                            Johnson and Johnson
-                          </option>
-                        </select>
-                        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                          <svg
-                            className="fill-current h-4 w-4"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                          >
-                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                          </svg>
+                        <div className="flex flex-col">
+                          <div>
+                            <label className="text-gray-600 font-xs font-sans font-thin">
+                              Date du test
+                            </label>
+                          </div>
+                          <input
+                            value={dateTest}
+                            onChange={(e) => {
+                              setDateTest(e.target.value);
+                            }}
+                            className="border border-gray-500 p-1 w-52 pl-2"
+                            type="date"
+                            placeholder="JJ/MM/AA"
+                            max="17/11/2021"
+                          />
+                        </div>
+                        <div className="">
+                          <TextField
+                            value={centreTest}
+                            onChange={(e) => {
+                              setCentreTest(e.target.value);
+                            }}
+                            label="Centre du test"
+                            id="standard-size-normal"
+                            defaultValue=""
+                            variant="standard"
+                          />
                         </div>
                       </div>
-                    </div>
-
+                    ) : (
+                      <div>
+                        <div>
+                          <TextField
+                            disabled
+                            id="standard-disabled"
+                            label="Date du test"
+                            defaultValue={cent.date_test}
+                            variant="standard"
+                          />
+                        </div>
+                        <div className="">
+                          <TextField
+                            disabled
+                            id="standard-disabled"
+                            label="Centre du test"
+                            defaultValue={cent.centre_test}
+                            variant="standard"
+                          />
+                        </div>
+                      </div>
+                    )}
                     <div className="flex flex-col">
                       <div>
                         <label className="text-gray-600 font-xs font-sans font-thin">
@@ -380,51 +371,132 @@ const Modal = ({ isShowing, hide, cent }) => {
                         </div>
                       </div>
                     </div>
-                    <div className="flex flex-col">
+                    {vaccinationn == "Vacciné(e)" ? (
                       <div>
-                        <label className="text-gray-600 font-xs font-sans font-thin">
-                          Date de la 1ere dose
-                        </label>
+                        <div className="flex flex-col">
+                          <div>
+                            <label className="text-gray-600 font-xs font-sans font-thin">
+                              Type du vaccin
+                            </label>
+                          </div>
+                          <div className="inline-block relative w-52 mt-2">
+                            <select
+                              value={typevaccin}
+                              onChange={(e) => {
+                                setTypeVaccin(e.target.value);
+                              }}
+                              className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+                            >
+                              <option value="/">/</option>
+                              <option value="Sinovac-CoronaVac">
+                                Sinovac-CoronaVac
+                              </option>
+                              <option value="Astrazeneca">Astrazeneca</option>
+                              <option value="Spoutnik">Sputnik</option>
+                              <option value="Johnson and Johnson">
+                                Johnson and Johnson
+                              </option>
+                            </select>
+                            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                              <svg
+                                className="fill-current h-4 w-4"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20"
+                              >
+                                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="flex flex-col">
+                          <div>
+                            <label className="text-gray-600 font-xs font-sans font-thin">
+                              Date de la 1ere dose
+                            </label>
+                          </div>
+                          <input
+                            value={dateDose1}
+                            onChange={(e) => {
+                              setDateDose1(e.target.value);
+                            }}
+                            className="border border-gray-500 p-1 w-52 pl-2"
+                            type="date"
+                            placeholder="JJ/MM/AA"
+                          />
+                        </div>
+                        {dateDose1 !== "00-00-0000" && (
+                          <div className="flex flex-col">
+                            <div>
+                              <label className="text-gray-600 font-xs font-sans font-thin">
+                                Date de la 2eme dose
+                              </label>
+                            </div>
+                            <input
+                              value={dateDose2}
+                              onChange={(e) => {
+                                setDateDose2(e.target.value);
+                              }}
+                              className="border border-gray-500 p-1 w-52 pl-2"
+                              type="date"
+                              placeholder="JJ/MM/AA"
+                            />
+                          </div>
+                        )}
+                        <div>
+                          <TextField
+                            value={centreVac}
+                            onChange={(e) => {
+                              setCentreVac(e.target.value);
+                            }}
+                            label="Centre de vaccination"
+                            id="standard-size-normal"
+                            defaultValue=""
+                            variant="standard"
+                          />
+                        </div>
                       </div>
-                      <input
-                        value={dateDose1}
-                        onChange={(e) => {
-                          setDateDose1(e.target.value);
-                        }}
-                        className="border border-gray-500 p-1 w-52 pl-2"
-                        type="date"
-                        placeholder="JJ/MM/AA"
-                      />
-                    </div>
-                    <div className="flex flex-col">
+                    ) : (
                       <div>
-                        <label className="text-gray-600 font-xs font-sans font-thin">
-                          Date de la 2eme dose
-                        </label>
+                        <div>
+                          <TextField
+                            disabled
+                            id="standard-disabled"
+                            label="Type du vaccin"
+                            defaultValue={cent.type_vaccin}
+                            variant="standard"
+                          />
+                        </div>
+                        <div>
+                          <TextField
+                            disabled
+                            id="standard-disabled"
+                            label="Date de la première dose"
+                            defaultValue={cent.date_1dose}
+                            variant="standard"
+                          />
+                        </div>
+                        <div>
+                          <TextField
+                            disabled
+                            id="standard-disabled"
+                            label="Date de la 2eme dose"
+                            defaultValue={cent.date_2dose}
+                            variant="standard"
+                          />
+                        </div>
+                        <div>
+                          <TextField
+                            disabled
+                            defaultValue={cent.centre_vacc}
+                            label="Centre de vaccination"
+                            id="standard-disabled"
+                            defaultValue=""
+                            variant="standard"
+                          />
+                        </div>
                       </div>
-                      <input
-                        value={dateDose2}
-                        onChange={(e) => {
-                          setDateDose2(e.target.value);
-                        }}
-                        className="border border-gray-500 p-1 w-52 pl-2"
-                        type="date"
-                        placeholder="JJ/MM/AA"
-                      />
-                    </div>
+                    )}
 
-                    <div>
-                      <TextField
-                        value={centreVac}
-                        onChange={(e) => {
-                          setCentreVac(e.target.value);
-                        }}
-                        label="Centre de vaccination"
-                        id="standard-size-normal"
-                        defaultValue=""
-                        variant="standard"
-                      />
-                    </div>
                     <div></div>
                     <div className=" flex justify-center pt-8">
                       <ButtonMain
